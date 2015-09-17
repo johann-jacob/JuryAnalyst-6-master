@@ -271,6 +271,13 @@
                 else{
                     self.lblCauseHardshipSymbol1.backgroundColor = [UIColor blackColor];
                 }
+                
+                UIButton *btn = [[UIButton alloc] initWithFrame:self.lblCauseHardshipSymbol1.frame];
+                btn.titleLabel.text = @"";
+                btn.backgroundColor = [UIColor clearColor];
+                btn.tag = [[dic objectForKeyedSubscript:@"qid"] integerValue];
+                [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:btn];
             }
             if(aryCauseHardshipSymbols.count > 1)
             {
@@ -288,6 +295,14 @@
                 else{
                     self.lblCauseHardshipSymbol2.backgroundColor = [UIColor blackColor];
                 }
+                
+                UIButton *btn = [[UIButton alloc] initWithFrame:self.lblCauseHardshipSymbol2.frame];
+                btn.titleLabel.text = @"";
+                btn.backgroundColor = [UIColor clearColor];
+                btn.tag = [[dic objectForKeyedSubscript:@"qid"] integerValue];
+                [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:btn];
+                
             }
             if(aryCauseHardshipSymbols.count > 2)
             {
@@ -305,6 +320,12 @@
                 else{
                     self.lblCauseHardshipSymbol3.backgroundColor = [UIColor blackColor];
                 }
+                UIButton *btn = [[UIButton alloc] initWithFrame:self.lblCauseHardshipSymbol3.frame];
+                btn.titleLabel.text = @"";
+                btn.backgroundColor = [UIColor clearColor];
+                btn.tag = [[dic objectForKeyedSubscript:@"qid"] integerValue];
+                [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:btn];
             }
             if(aryCauseHardshipSymbols.count > 3)
             {
@@ -322,6 +343,13 @@
                 else{
                     self.lblCauseHardshipSymbol4.backgroundColor = [UIColor blackColor];
                 }
+                
+                UIButton *btn = [[UIButton alloc] initWithFrame:self.lblCauseHardshipSymbol4.frame];
+                btn.titleLabel.text = @"";
+                btn.backgroundColor = [UIColor clearColor];
+                btn.tag = [[dic objectForKeyedSubscript:@"qid"] integerValue];
+                [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:btn];
             }
         }
         
@@ -344,6 +372,12 @@
                 else{
                     self.lblFrivilousSymbol1.backgroundColor = [UIColor blackColor];
                 }
+                UIButton *btn = [[UIButton alloc] initWithFrame:self.lblFrivilousSymbol1.frame];
+                btn.titleLabel.text = @"";
+                btn.backgroundColor = [UIColor clearColor];
+                btn.tag = [[dic objectForKeyedSubscript:@"qid"] integerValue];
+                [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:btn];
             }
             if(aryFrivilousSymbols.count > 1)
             {
@@ -361,19 +395,128 @@
                 else{
                     self.lblFrivilousSymbol2.backgroundColor = [UIColor blackColor];
                 }
+                
+                UIButton *btn = [[UIButton alloc] initWithFrame:self.lblFrivilousSymbol2.frame];
+                btn.titleLabel.text = @"";
+                btn.backgroundColor = [UIColor clearColor];
+                btn.tag = [[dic objectForKeyedSubscript:@"qid"] integerValue];
+                [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:btn];
             }
         }
         
-        UIView *symbolView = [[DataManager shareDataManager] getSurveySymbolView:self.juror.tid];
+        UIView *symbolView = [self getSurveySymbolView_t:self.juror.tid];
         
         if(self.svSymbol.frame.size.width > symbolView.frame.size.width)
             symbolView.center = CGPointMake(self.svSymbol.frame.size.width / 2, self.svSymbol.frame.size.height / 2);
         
         [self.svSymbol addSubview:symbolView];
         self.svSymbol.contentSize = symbolView.frame.size;
+        
+        
     }
     
     [self.tvQuestions reloadData];
+}
+
+- (UIView *) getSurveySymbolView_t:(NSString *)jurorId
+{
+    int size = 26, inteval = 2;
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, size)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    int symbolIndex = 0;
+    //    for (NSDictionary *dic in self.aryJurorPersonalityProfileDatas) {
+    //
+    //        NSString *jurorId_ = [dic objectForKey:@"juror"];
+    //
+    //        if([jurorId_  isEqualToString:jurorId])
+    //        {
+    //            NSArray *personalDatas = [dic objectForKey:@"personal"];
+    //
+    //            for (NSDictionary *personalData in personalDatas) {
+    //
+    //                symbolIndex ++;
+    //
+    //                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((size + inteval) * (symbolIndex - 1), 0, 26, 26)];
+    //                label.textAlignment = NSTextAlignmentCenter;
+    //                label.text = [personalData objectForKey:@"symbol"];
+    //                label.textColor = [UIColor whiteColor];
+    //                label.font = [UIFont boldSystemFontOfSize:12];
+    //
+    //                label.backgroundColor = [UIColor greenColor];
+    //
+    //                [view addSubview:label];
+    //                label = nil;
+    //            }
+    //
+    //            break;
+    //        }
+    //    }
+    
+    for (QuestionInfo *localQuestion in [DataManager shareDataManager].aryLocalQuestions)
+    {
+        if(localQuestion.symbol.length == 0) continue;
+        
+        NSInteger weight = [[DataManager shareDataManager] getWeightValueOnResponseWithJuror:jurorId question:localQuestion.qid];
+        
+        if(weight == NSNotFound || [[DataManager shareDataManager] includesThisSymbolOnLeftOfJuror:jurorId symbol:localQuestion.symbol]) continue;
+        
+        symbolIndex ++;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((size + inteval) * (symbolIndex - 1), 0, 26, 26)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((size + inteval) * (symbolIndex - 1), 0, 26, 26)];
+        btn.titleLabel.text = @"";
+        btn.backgroundColor = [UIColor clearColor];
+        btn.tag = localQuestion.qid;
+        [btn addTarget:self action:@selector(click_symbol:) forControlEvents:UIControlEventTouchUpInside];
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        // Change N% to the Questions number
+        
+        if([localQuestion.symbol isEqualToString:@"N%"]){
+            label.text = @"25%";
+            
+            NSMutableDictionary *jurorResponse = [[DataManager shareDataManager].dicResponse objectForKey:jurorId];
+            
+            if(jurorResponse != nil){
+                NSMutableDictionary *responseData = [jurorResponse objectForKey:[NSString stringWithFormat:@"%ld", localQuestion.qid]];
+                label.text = [responseData objectForKey:@"response"];
+            }
+        }
+        else{
+            label.text = localQuestion.symbol;
+        }
+        
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont boldSystemFontOfSize:12];
+        
+        if(weight > 0)
+        {
+            label.backgroundColor = [UIColor colorWithRed:63.0f / 255.0f green:127.0f/ 255.0f blue:59.0f/ 255.0f alpha:1.0];
+        }
+        else if (weight < 0)
+        {
+            label.backgroundColor = [UIColor colorWithRed:133.0f / 255.0f green:32.0f/ 255.0f blue:25.0f/ 255.0f alpha:1.0];
+        }
+        else{
+            label.backgroundColor = [UIColor colorWithRed:31.0f / 255.0f green:40.0f/ 255.0f blue:55.0f/ 255.0f alpha:1.0];
+        }
+        
+        [view addSubview:label];
+        [view addSubview:btn];
+        label = nil;
+    }
+    
+    view.frame = CGRectMake(0, 0, (size + inteval) * symbolIndex, size);
+    
+    return view;
+}
+
+- (void)click_symbol:(UIButton *)symbol {
+    QuestionInfo *question = [[DataManager shareDataManager] getLocalQuestion:symbol.tag];
+     [self showJurorResponseView:question];
 }
 
 - (IBAction)onBack:(id)sender
@@ -397,8 +540,6 @@
     
     self.summaryView.hidden = NO;
     
-
-
 }
 
 #pragma mark NewGroupViewDelegate

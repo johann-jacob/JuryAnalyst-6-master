@@ -10,6 +10,8 @@
 	<string>JuryAnalyst</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>01A251A21C6B47F1A79204F75313D2261B39E048</key>
+		<string>https://github.com/johann-jacob/JuryAnalyst-6-master.git</string>
 		<key>E91C31CBCF8BB18B48D43660C80F73A1204AFF95</key>
 		<string>https://github.com/itsjaked/JuryAnalyst-6.git</string>
 	</dict>
@@ -17,17 +19,27 @@
 	<string>JuryAnalyst.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E91C31CBCF8BB18B48D43660C80F73A1204AFF95</key>
+		<key>01A251A21C6B47F1A79204F75313D2261B39E048</key>
 		<string>../..</string>
+		<key>E91C31CBCF8BB18B48D43660C80F73A1204AFF95</key>
+		<string>../../../JuryAnalyst%206</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/itsjaked/JuryAnalyst-6.git</string>
+	<string>https://github.com/johann-jacob/JuryAnalyst-6-master.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E91C31CBCF8BB18B48D43660C80F73A1204AFF95</string>
+	<string>01A251A21C6B47F1A79204F75313D2261B39E048</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>01A251A21C6B47F1A79204F75313D2261B39E048</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JuryAnalyst-6-master</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

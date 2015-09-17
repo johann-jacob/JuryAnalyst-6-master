@@ -137,4 +137,6 @@ enum SORT_OPTION {
 + (NSString *)base64StringFromData: (NSData *)data length: (NSUInteger)length;
 + (NSData *)base64DataFromString: (NSString *)string;
 
+- (NSInteger) getWeightValueOnResponseWithJuror:(NSString *)jurorId question:(NSInteger)qid;
+- (BOOL) includesThisSymbolOnLeftOfJuror:(NSString *)jurorId symbol:(NSString *)symbol;
 @end

@@ -1006,6 +1006,9 @@ static DataManager *_shareDataManager;
         symbolIndex ++;
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((size + inteval) * (symbolIndex - 1), 0, 26, 26)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((size + inteval) * (symbolIndex - 1), 0, 26, 26)];
+        btn.titleLabel.text = @"";
+        btn.backgroundColor = [UIColor clearColor];
         label.textAlignment = NSTextAlignmentCenter;
         
         // Change N% to the Questions number
@@ -1113,6 +1116,7 @@ static DataManager *_shareDataManager;
                 NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                             questionInfo.symbol,                @"symbol",
                                             [jurorResponse objectForKey:qid],   @"response",
+                                            [NSString stringWithFormat:@"%ld", (long)questionInfo.qid],                   @"qid",
                                             nil];
                 
                 [arySymbols addObject:dic];
@@ -1154,6 +1158,7 @@ static DataManager *_shareDataManager;
                 NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                             questionInfo.symbol,                @"symbol",
                                             [jurorResponse objectForKey:qid],   @"response",
+                                            [NSString stringWithFormat:@"%ld", (long)questionInfo.qid],                   @"qid",
                                             nil];
                 
                 [arySymbols addObject:dic];
